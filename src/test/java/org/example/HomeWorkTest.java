@@ -16,7 +16,41 @@ class HomeWorkTest {
     HomeWork homeWork = new HomeWork();
 
     @Test
-    void managerFabric() {
+    void managerFabricTest_threeTickets() {
+        TicketManager manager = homeWork.managerFabric();
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(new Ticket("lol"));
+        tickets.add(new Ticket("pension"));
+        tickets.add(new Ticket("pension"));
+
+        for (Ticket ticket : tickets){
+            manager.add(ticket);
+        }
+
+        assertEquals(tickets.get(1), manager.next());
+        assertEquals(tickets.get(2), manager.next());
+        assertEquals(tickets.get(0), manager.next());
+    }
+
+    @Test
+    void managerFabricTest_hugeTickets() {
+        TicketManager manager = homeWork.managerFabric();
+        List<Ticket> tickets = new ArrayList<>();
+
+        for(int i = 0; i < 10; ++i){
+            tickets.add(new Ticket("lol"));
+        }
+
+        tickets.add(new Ticket("1212"));
+        tickets.add(new Ticket("12123"));
+
+        for (Ticket ticket : tickets){
+            manager.add(ticket);
+        }
+
+        for (Ticket ticket : tickets) {
+            assertEquals(ticket, manager.next());
+        }
     }
 
     @Test
